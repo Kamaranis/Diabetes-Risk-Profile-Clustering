@@ -1,12 +1,12 @@
-# **Proyecto de Visualización: Análisis de perfiles de riesgo para la diabetes**
+# **Proyecto de visualización: Análisis de perfiles de riesgo para la diabetes**
 
 Este repositorio contiene el trabajo realizado para la Práctica 2 de la asignatura "Visualización de Datos" del Máster en Ciencia de Datos. El proyecto explora el dataset "*CDC Diabetes Health Indicators*" para identificar perfiles de riesgo en la población y analizar su relación con la prevalencia de la diabetes, con un foco especial en el impacto de la salud mental.
 
-## **🚀 Visualización Interactiva**
+## **🚀 Visualización interactiva**
 
 El resultado final de este análisis es un dashboard interactivo desarrollado en Tableau. Se pueden explorar los resultados aquí:
 
-[**▶️ Acceder al Dashboard Interactivo en Tableau Public**](https://public.tableau.com/views/Perfilesderiesgoparaladiabetesfinal/Caracterizacindeperfiles?:language=es-ES&:sid&:redirect=auth&:display_count=n&:origin=viz_share_link)
+[**▶️ Acceder al *Dashboard* interactivo en Tableau Public**](https://public.tableau.com/views/Perfilesderiesgoparaladiabetesfinal/Caracterizacindeperfiles?:language=es-ES&:sid&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 ## **1. Selección del Dataset (Resumen PR1)**
 
