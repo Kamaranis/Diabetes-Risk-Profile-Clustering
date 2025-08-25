@@ -31,6 +31,12 @@ The primary output of this project is the `cdc_diabetes_health_indicators_cluste
 *   A `cluster` label (0, 1, or 2) for each individual, segmenting the population into three distinct profiles.
 *   A [visualization at Tableau Public](https://public.tableau.com/views/Perfilesderiesgoparaladiabetesfinal/Caracterizacindeperfiles?:language=es-ES&:sid&:redirect=auth&:display_count=n&:origin=viz_share_link) 
 
+![alt text](image.png)  
+Figure 1: *Pearson correlation index for the dataset`s variables*
+
+![alt text](image-1.png)  
+Figure 2: *Mental Health versus diabetes diagnostics*
+
 ### Strategic Plan for Tableau Visualization
 
 This enriched dataset is designed to power an interactive dashboard in Tableau to answer key business questions. The plan includes:
@@ -61,7 +67,7 @@ To explore the analysis:
 
 ## 👤 Author
 
-**[Tu Nombre]**
+**Antonio Barrera Mora**
 
-*   **LinkedIn:** [Tu Perfil de LinkedIn]
+*   **LinkedIn:** https://www.linkedin.com/in/anbamo/
 *   **GitHub:** @Kamaranis
