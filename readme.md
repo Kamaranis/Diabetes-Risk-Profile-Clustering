@@ -1,6 +1,6 @@
 # **Proyecto de visualización: Análisis de perfiles de riesgo para la diabetes**
 
-Este repositorio contiene el trabajo realizado para la Práctica 2 de la asignatura "Visualización de Datos" del Máster en Ciencia de Datos. El proyecto explora el dataset "*CDC Diabetes Health Indicators*" para identificar perfiles de riesgo en la población y analizar su relación con la prevalencia de la diabetes, con un foco especial en el impacto de la salud mental.
+El proyecto explora el dataset "*CDC Diabetes Health Indicators*" para identificar perfiles de riesgo en la población y analizar su relación con la prevalencia de la diabetes, con un foco especial en el impacto de la salud mental.
 
 ## **🚀 Visualización interactiva**
 
