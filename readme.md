@@ -1,67 +1,67 @@
-# **Proyecto de visualización: Análisis de perfiles de riesgo para la diabetes**
+# Creating Diabetes Risk Profiles with Unsupervised Machine Learning
 
-El proyecto explora el dataset "*CDC Diabetes Health Indicators*" para identificar perfiles de riesgo en la población y analizar su relación con la prevalencia de la diabetes, con un foco especial en el impacto de la salud mental.
+## 📄 Project Goal
 
-## **🚀 Visualización interactiva**
+This project aims to move beyond simple prediction and deeply understand the characteristics of the population at risk for diabetes. Using the "CDC Diabetes Health Indicators" dataset, this analysis employs a full data science workflow—from Exploratory Data Analysis (EDA) to unsupervised clustering—to identify and define distinct "risk profiles".
 
-El resultado final de este análisis es un dashboard interactivo desarrollado en Tableau. Se pueden explorar los resultados aquí:
+The final deliverable is not a model, but a **strategically enriched dataset**, ready for visualization and exploration in a Business Intelligence tool like Tableau. The core research question is: *Is it possible to identify risk profiles that combine health, socio-economic, and behavioral factors, and how are these profiles associated with diabetes?*
 
-[**▶️ Acceder al *Dashboard* interactivo en Tableau Public**](https://public.tableau.com/views/Perfilesderiesgoparaladiabetesfinal/Caracterizacindeperfiles?:language=es-ES&:sid&:redirect=auth&:display_count=n&:origin=viz_share_link)
+## ✨ Analysis Showcase & Methodology
 
-## **1. Selección del Dataset (Resumen PR1)**
+This project is a case study in how insights from EDA directly inform data preprocessing and feature engineering decisions.
 
-El conjunto de datos seleccionado fue el **"CDC Diabetes Health Indicators"** del repositorio de la UCI. La elección se justificó por varios motivos clave:
+*   **Insight-Driven EDA:**
+    *   **The Signal in the "Outliers":** The initial analysis of variables like `MentHlth` and `PhysHlth` revealed highly skewed distributions. The boxplots showed that the "outliers" were not data errors, but represented the minority of the population suffering from chronic health issues—**this was the signal, not the noise**.
+    *   **Correlation vs. Relationship:** The analysis proved that a low Pearson correlation doesn't mean "no relationship". While `MentHlth` had a weak linear correlation with diabetes, visualizations showed a clear difference in the *distribution* of mental health days between diabetic and non-diabetic groups.
+    *   **Data Integrity:** The dataset was confirmed to be of high quality, with no missing values and no problematic multicollinearity, making it ideal for robust analysis.
 
-* **Relevancia temática:** La diabetes es un desafío sanitario de primer orden. El enfoque del proyecto busca explorar no solo los factores de riesgo físicos, sino también la conexión con la salud mental, un ángulo a menudo subestimado.  
-* **Complejidad y riqueza:** Con más de 250,000 registros y 21 variables iniciales, el dataset ofrece una base estadística robusta. Combina indicadores binarios, ordinales y cuantitativos, permitiendo un análisis multidimensional.  
-* **Originalidad:** El objetivo no era predecir la diabetes, sino ir un paso más allá: segmentar a la población en perfiles de riesgo comprensibles mediante técnicas de clustering, ofreciendo un enfoque exploratorio y novedoso.
+*   **Advanced Feature Engineering:**
+    To capture complex behaviors and risks, two powerful synthetic indices were created:
+    1.  **`healthy_habits_score`:** An aggregate score combining `PhysActivity`, `Fruits`, and `Veggies` consumption.
+    2.  **`cardio_risk_index`:** A composite index created from the scaled values of `HighBP`, `HighChol`, and `BMI` to quantify cardiovascular risk.
 
-La pregunta de investigación principal que guió el proyecto fue: **¿Es posible identificar perfiles de riesgo que combinen factores de salud (especialmente mental), socioeconómicos y de comportamiento, y cómo se asocian estos perfiles con la diabetes?**
+*   **Robust Preprocessing & Clustering:**
+    *   **`RobustScaler`:** Given the presence of significant outliers (which were identified as a key signal), `RobustScaler` was chosen over `StandardScaler` to scale the data, as it is less sensitive to extreme values.
+    *   **K-Means Clustering:** The Elbow Method was used on the final engineered features to determine that **k=3** was the optimal number of clusters, providing the best balance between detail and interpretability.
 
-## **2. Proceso de análisis y visualización (PR2)**
+## 🏆 Final Deliverable: A Tableau-Ready Clustered Dataset
 
-El trabajo se dividió en dos fases principales: un análisis y preprocesamiento de datos en Python, y la construcción de la visualización interactiva en Tableau.
+The primary output of this project is the `cdc_diabetes_health_indicators_clustered.csv` file. This dataset contains all 253,680 original records enriched with:
+*   The two engineered indices (`healthy_habits_score`, `cardio_risk_index`).
+*   A `cluster` label (0, 1, or 2) for each individual, segmenting the population into three distinct profiles.
+*   A [visualization at Tableau Public](https://public.tableau.com/views/Perfilesderiesgoparaladiabetesfinal/Caracterizacindeperfiles?:language=es-ES&:sid&:redirect=auth&:display_count=n&:origin=viz_share_link) 
 
-### **2.1. Análisis y preparación en Python (*Jupyter Notebook*)**
+### Strategic Plan for Tableau Visualization
 
-El *notebook* `PR2 - Proyecto de visualizacion.ipynb` detalla el siguiente flujo de trabajo:
+This enriched dataset is designed to power an interactive dashboard in Tableau to answer key business questions. The plan includes:
 
-1. **Análisis Exploratorio de Datos (EDA):**  
-   * Se validó la integridad del dataset, confirmando la ausencia de valores nulos.  
-   * Se analizaron las distribuciones de variables clave, identificando el desbalance de la variable objetivo (`Diabetes_binary`) y la fuerte asimetría en las variables de salud mental y física.  
-   * Se descubrió que aunque la correlación lineal entre `MentHlth` (salud mental) y la diabetes era baja, los *boxplots* mostraban una clara diferencia en la distribución, sugiriendo una relación más compleja.  
-2. **Ingeniería de características:**  
-   * Para enriquecer el análisis, se crearon dos índices sintéticos:  
-     * `score_habitos_saludables`: Una suma simple de indicadores binarios (actividad física, consumo de frutas y verduras) para obtener un score de 0 a 3\.  
-     * `indice_riesgo_cardio`: Una suma de los valores estandarizados (con *RobustScaler*) de **HighBP, HighChol** y **BMI** para crear un indicador de riesgo cardiovascular combinado.  
-3. ***Clustering*** **no supervisado:**  
-   * Se utilizó el algoritmo **K-Means** para segmentar a la población en grupos homogéneos.  
-   * Mediante el "método del codo" se determinó que **k=3** era el número óptimo de clústeres, ofreciendo el mejor equilibrio entre detalle e interpretabilidad.  
-   * Se generó la variable final cluster, que asigna a cada individuo a uno de los tres perfiles identificados.
+1.  **Dashboard 1: Cluster Profile Characterization:**
+    *   **Objective:** Understand what defines each of the 3 clusters.
+    *   **Visuals:** Comparative bar charts for the new indices, and breakdown tables showing averages for other key variables (`MentHlth`, `GenHlth`, `Age`, `Income`) per cluster. This will allow for assigning intuitive labels like "Healthy and Active," "High Cardiovascular Risk," etc.
 
-El resultado de esta fase fue un archivo CSV enriquecido (`cdc_diabetes_health_indicators_clustered.csv`), que sirvió como fuente de datos para Tableau.
+2.  **Dashboard 2: Diabetes Analysis by Profile:**
+    *   **Objective:** Analyze how diabetes prevalence varies across the newly defined profiles.
+    *   **Visuals:** Bar charts showing diabetes proportion per cluster, and interactive scatter plots mapping individuals based on the two indices, colored by their cluster. This will visually demonstrate the separation of risk profiles.
 
-### **2.2. Visualización interactiva en Tableau**
+## 💻 Technologies Used
 
-El dashboard público se compone de dos paneles principales:
+*   **Language:** Python 3
+*   **Libraries:**
+    *   Pandas (Data Manipulation)
+    *   Matplotlib & Seaborn (Data Visualization)
+    *   Scikit-learn (`RobustScaler`, `KMeans`)
+    *   Jupyter Notebook (Development Environment)
 
-* **Dashboard 1: Caracterización de Perfiles:** Permite entender la "personalidad" de cada uno de los 3 clústeres. Muestra los valores promedio de los índices de riesgo y hábitos, y una tabla interactiva para explorar en detalle otras métricas como la salud mental, la edad o los ingresos.  
-* **Dashboard 2: Análisis de la diabetes por perfil:** Responde a la pregunta de investigación principal. Incluye un gráfico de barras con la prevalencia de diabetes en cada perfil, un scatter plot que valida visualmente la segmentación, y boxplots interactivos para un análisis más profundo.
+## 🚀 Getting Started
 
-## **3. Conclusiones y hallazgos principales**
+To explore the analysis:
+1.  Clone the repository.
+2.  Install the required Python libraries: `pandas`, `scikit-learn`, `matplotlib`, `seaborn`, `ucimlrepo`.
+3.  Open the `Jupyter Notebook` file and run the cells sequentially to reproduce the entire workflow from EDA to the final clustered CSV export.
 
-El análisis y la visualización permitieron extraer conclusiones significativas:
+## 👤 Author
 
-1. **Se identificaron 3 perfiles de riesgo claros y distintos:**  
-   * **Perfil 1 - "Saludable y consciente":** Bajo riesgo cardiovascular y excelentes hábitos de vida. Presentan la prevalencia de diabetes más baja (12%).  
-   * **Perfil 2 - "Alto riesgo cardiovascular":** El grupo de mayor edad y con el índice de riesgo cardiovascular más alto. A pesar de tener hábitos moderados su prevalencia de diabetes es la más alta (27%).  
-   * **Perfil 3 - "Hábitos precarios":** Grupo definido por un bajo *score* de hábitos y la peor salud mental y física. Presentan una alta prevalencia de diabetes (21%).  
-2. **El rol de la salud mental es específico de un perfil:** El análisis demostró que los problemas de salud mental no son un factor generalizado, sino el rasgo definitorio del **"Perfil de Hábitos Precarios" donde el malestar es crónico** independientemente de si el individuo tiene diabetes o no.  
-3. **La segmentación es más potente que el análisis univariado:** El enfoque de clustering permitió descubrir relaciones complejas que un análisis variable por variable no hubiera revelado.
+**[Tu Nombre]**
 
-## **🛠️ Herramientas Utilizadas**
-
-* **Lenguaje:** Python 3.x  
-* **Librerías Principales:** Pandas, Scikit-learn, Matplotlib, Seaborn  
-* **Entorno:** Jupyter Notebook  
-* **Herramienta de Visualización:** Tableau Public
+*   **LinkedIn:** [Tu Perfil de LinkedIn]
+*   **GitHub:** @Kamaranis
